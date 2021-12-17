@@ -14,16 +14,19 @@ worm_modifier = 2
 locations = "on a boulder", "behind a pillar", "in a ditch"
 def rifle_shot():
     global rifle_ammo, remaining_health, current_target, target_AC, hit_modifier
-    print("BANG BANG, you open fire")
-    hit = random.randint(0,21)
-    rifle_ammo -= 1
-    if hit + hit_modifier >= target_AC:
-        damage = random.randint(10,20)
-        remaining_health = remaining_health - damage
-        damage = str(damage)
-        print("you hit and deal " + damage + " damage")
+    if rifle_ammo <= 0:
+        print("you are out of rifle ammo, find a spot to reload")
     else:
-        print("your rifle bolt misses")
+        print("BANG BANG, you open fire")
+        hit = random.randint(0,21)
+        rifle_ammo -= 1
+        if hit + hit_modifier >= target_AC:
+            damage = random.randint(10,20)
+            remaining_health = remaining_health - damage
+            damage = str(damage)
+            print("you hit and deal " + damage + " damage")
+        else:
+            print("your rifle bolt misses")
     
 def worm_attack():
     print("the worm dives at you")
@@ -92,55 +95,58 @@ time.sleep(5)
 print("Sudenly, you hear something behind you, and you turn around to see a massive space worm standing round 20ft from you. It bears its teeth and hisses as you draw your weapon.\n")
 time.sleep(5)
 
-while remaining_health > 0:
+while remaining_health >= 0:
     time.sleep(3)
     if health <= 0:
         print("you lose, game over")
-    print("what would you like to do?")
-    print("A. fire your rifle")
-    print("B. recharge shield")
-    print("C. Check health, stants, and invantory")
-    print("D. Find better positioning")
-    choice = input("what would you like to do? \n ")
-    if choice == "A":
-        rifle_shot()
-        print("\n")
-        time.sleep(3)
-        worm_attack()
-        print("\n")
-    elif choice == "B":
-        Cover()
-        print("\n")
-        time.sleep(3)
-        worm_attack()
-        print("\n")
-
-    elif choice == "C":
-        rifle_ammo = str(rifle_ammo)
-        print("loaded rifle shots = " + rifle_ammo)
-        rifle_ammo = int(rifle_ammo)
-        shields = str(shields)
-        print("shields = " + shields)
-        shields = int(shields)
-        health = str(health)
-        print("health = " + health)
-        health = int(health)
-        hit_modifier = str(hit_modifier)
-        print("Curent hit modifier = " + hit_modifier)
-        hit_modifier = int(hit_modifier)
-        player_AC = str(player_AC)
-        print("armor class = " + player_AC)
-        player_AC = int(player_AC)
-        print ("\n")
-    elif choice == "D":
-        print("\n")
-        find_positioning()
-        print("\n")
-        time.sleep(3)
-        worm_attack()
-        print("\n")
     else:
-        print("chose A, B, C, or D")
+        print("what would you like to do?")
+        print("A. fire your rifle")
+        print("B. recharge shield")
+        print("C. Check health, stants, and invantory")
+        print("D. Find better positioning")
+        choice = input("what would you like to do? \n ")
+        if choice == "A":
+            rifle_shot()
+            print("\n")
+            time.sleep(3)
+            worm_attack()
+            print("\n")
+        elif choice == "B":
+            Cover()
+            print("\n")
+            time.sleep(3)
+            worm_attack()
+            print("\n")
+        elif choice == "C":
+            rifle_ammo = str(rifle_ammo)
+            print("loaded rifle shots = " + rifle_ammo)
+            rifle_ammo = int(rifle_ammo)
+            shields = str(shields)
+            print("shields = " + shields)
+            shields = int(shields)
+            health = str(health)
+            print("health = " + health)
+            health = int(health)
+            hit_modifier = str(hit_modifier)
+            print("Curent hit modifier = " + hit_modifier)
+            hit_modifier = int(hit_modifier)
+            player_AC = str(player_AC)
+            print("armor class = " + player_AC)
+            player_AC = int(player_AC)
+            print ("\n")
+        elif choice == "D":
+            print("\n")
+            find_positioning()
+            print("\n")
+            time.sleep(3)
+            worm_attack()
+            print("\n")
+        else:
+            print("chose A, B, C, or D")
+
+
 
 if remaining_health <= 0:
     print("The worm slumps dead in front of you, and you move on toward your destination.")
+
