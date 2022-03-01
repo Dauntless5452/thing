@@ -55,18 +55,23 @@ def Cover():
 
 def find_positioning(chosen_location):
     global rifle_ammo, player_AC, hit_modifier
-    if chosen_location == "A":
-        print("you get a better place to shoot from")
-        hit_modifier = 5
-    elif chosen_location == "B":
-        print("you hide become harder to hit")
-        player_AC = 16
-    elif chosen_location == "C":
-        print("you find a ditch to hide in, you reload your rifle")
-        rifle_ammo = 10
-    else:
-        print("chose A, B, or C")
-        
+    while True:
+        if chosen_location == "A":
+            print("you get a better place to shoot from")
+            hit_modifier = 5
+            break
+        elif chosen_location == "B":
+            print("you hide become harder to hit")
+            player_AC = 16
+            break
+        elif chosen_location == "C":
+            print("you find a ditch to hide in, you reload your rifle")
+            rifle_ammo = 10
+            break
+        else:
+            chosen_location = input("chose A, B, or C")
+
+    
 
 def use_item():
     global remaining_health, health
